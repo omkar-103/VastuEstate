@@ -1,0 +1,16 @@
+{
+  "name": "vastuestate-root",
+  "version": "1.0.0",
+  "description": "VastuEstate Rental Platform",
+  "scripts": {
+    "start": "cd server && node index.js",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "install-all": "cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "heroku-postbuild": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

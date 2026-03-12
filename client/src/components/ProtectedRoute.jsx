@@ -1,0 +1,24 @@
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const ProtectedRoute = ({ children, roles }) => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) return null;
+
+  if (!user) {
+    const target = roles?.includes('owner') ? '/owner/login' 
+                 : roles?.includes('admin') ? '/admin/login' 
+                 : '/login';
+    return <Navigate to={target} state={{ from: location }} replace />;
+  }
+
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;
